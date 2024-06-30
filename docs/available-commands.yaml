@@ -1,7 +1,9 @@
-trit:
+trans:
   description: Translates a text.
-  usage: "[language] <your text>"
+  usage: "`!trans [from] [to] <your text>`\n\n**Ps:** _Default translation set to EN - English_"
   arg_notes:
   - "`language` must be a string containing the language code that will be the used to generate the translated text."
+langs:
+  description: List all available languages.
 help:
-  description: Display all available commands.
+  description: List all available commands.
