@@ -1,0 +1,7 @@
+trit:
+  description: Translates a text.
+  usage: "[language] <your text>"
+  arg_notes:
+  - "`language` must be a string containing the language code that will be the used to generate the translated text."
+help:
+  description: Display all available commands.
