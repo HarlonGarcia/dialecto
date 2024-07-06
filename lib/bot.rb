@@ -19,24 +19,23 @@ module DialectoBot
     prefix: @default_prefix,
   )
 
-  bot.command :trans do |event, from, *args|
+  bot.command :trans do |event, language, *args|
     commands = load_commands
     command_help = "Usage: #{commands["trans"]["usage"]}"
     
-    if args.empty?
+    if language.nil? || !language.match(/^[a-zA-Z]{2}$/)
       event.respond command_help
-      next
+      return
     end
-
-    if args[0].match(/^[a-zA-Z]{2}$/)
-      to = args.shift.upcase
-    else
-      to = 'EN'
-    end
-
+  
     text = args.join(' ')
 
-    translation = Translator.translate(text, from, to)
+    if text.nil? || text.empty?
+      event.respond command_help
+      return
+    end
+  
+    translation = Translator.translate(text, language.upcase)
     event.respond translation
   end
   
@@ -69,7 +68,7 @@ module DialectoBot
     raise "Loaded YAML is not a Hash" unless commands.is_a?(Hash)
 
     commands.each do |command, info|
-      message += "`#{default_prefix}#{command}` - #{info['description']}\n"
+      message += "`#{@default_prefix}#{command}` - #{info['description']}\n"
     end
     
     message

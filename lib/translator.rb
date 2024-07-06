@@ -14,9 +14,9 @@ module Translator
     config.host = ENV['DEEPL_API_URL']
   end
 
-  def translate(text, from, to)
+  def translate(text, language)
     begin
-      translation = DeepL.translate(text, from, to)
+      translation = DeepL.translate(text, nil, language)
       translation.text
     rescue StandardError => err
       "Error: #{err.message}"
